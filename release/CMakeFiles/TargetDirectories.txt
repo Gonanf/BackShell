@@ -1,0 +1,3 @@
+C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release/CMakeFiles/BackShell.dir
+C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release/CMakeFiles/edit_cache.dir
+C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release/CMakeFiles/rebuild_cache.dir
