@@ -1,3 +1,5 @@
 C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release/CMakeFiles/BackShell.dir
+C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release/CMakeFiles/key_logger.dir
+C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release/CMakeFiles/reverse_shell.dir
 C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release/CMakeFiles/edit_cache.dir
 C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release/CMakeFiles/rebuild_cache.dir

@@ -77,6 +77,80 @@ build BackShell.exe: CXX_EXECUTABLE_LINKER__BackShell_Debug CMakeFiles/BackShell
   TARGET_IMPLIB = BackShell.lib
   TARGET_PDB = BackShell.pdb
 
+# =============================================================================
+# Object build statements for EXECUTABLE target key_logger
+
+
+#############################################
+# Order-only phony target for key_logger
+
+build cmake_object_order_depends_target_key_logger: phony || .
+
+build CMakeFiles/key_logger.dir/src/key_logger.cpp.obj: CXX_COMPILER__key_logger_unscanned_Debug C$:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/src/key_logger.cpp || cmake_object_order_depends_target_key_logger
+  DEP_FILE = CMakeFiles\key_logger.dir\src\key_logger.cpp.obj.d
+  FLAGS = -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview
+  OBJECT_DIR = CMakeFiles\key_logger.dir
+  OBJECT_FILE_DIR = CMakeFiles\key_logger.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\key_logger.dir\
+  TARGET_PDB = key_logger.pdb
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target key_logger
+
+
+#############################################
+# Link the executable key_logger.exe
+
+build key_logger.exe: CXX_EXECUTABLE_LINKER__key_logger_Debug CMakeFiles/key_logger.dir/src/key_logger.cpp.obj
+  FLAGS = -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview
+  LINK_FLAGS = -Xlinker /subsystem:console  -fuse-ld=lld-link
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -loldnames
+  OBJECT_DIR = CMakeFiles\key_logger.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = CMakeFiles\key_logger.dir\
+  TARGET_FILE = key_logger.exe
+  TARGET_IMPLIB = key_logger.lib
+  TARGET_PDB = key_logger.pdb
+
+# =============================================================================
+# Object build statements for EXECUTABLE target reverse_shell
+
+
+#############################################
+# Order-only phony target for reverse_shell
+
+build cmake_object_order_depends_target_reverse_shell: phony || .
+
+build CMakeFiles/reverse_shell.dir/src/reverse_shell.cpp.obj: CXX_COMPILER__reverse_shell_unscanned_Debug C$:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/src/reverse_shell.cpp || cmake_object_order_depends_target_reverse_shell
+  DEP_FILE = CMakeFiles\reverse_shell.dir\src\reverse_shell.cpp.obj.d
+  FLAGS = -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview
+  OBJECT_DIR = CMakeFiles\reverse_shell.dir
+  OBJECT_FILE_DIR = CMakeFiles\reverse_shell.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\reverse_shell.dir\
+  TARGET_PDB = reverse_shell.pdb
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target reverse_shell
+
+
+#############################################
+# Link the executable reverse_shell.exe
+
+build reverse_shell.exe: CXX_EXECUTABLE_LINKER__reverse_shell_Debug CMakeFiles/reverse_shell.dir/src/reverse_shell.cpp.obj
+  FLAGS = -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview
+  LINK_FLAGS = -Xlinker /subsystem:console  -fuse-ld=lld-link
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -loldnames
+  OBJECT_DIR = CMakeFiles\reverse_shell.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = CMakeFiles\reverse_shell.dir\
+  TARGET_FILE = reverse_shell.exe
+  TARGET_IMPLIB = reverse_shell.lib
+  TARGET_PDB = reverse_shell.pdb
+
 
 #############################################
 # Utility command for edit_cache
@@ -106,6 +180,10 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 build BackShell: phony BackShell.exe
 
+build key_logger: phony key_logger.exe
+
+build reverse_shell: phony reverse_shell.exe
+
 # =============================================================================
 # Folder targets.
 
@@ -114,7 +192,7 @@ build BackShell: phony BackShell.exe
 #############################################
 # Folder: C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release
 
-build all: phony BackShell.exe
+build all: phony BackShell.exe key_logger.exe reverse_shell.exe
 
 # =============================================================================
 # Built-in targets

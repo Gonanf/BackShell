@@ -1,3 +1,5 @@
 cmake_minimum_required(VERSION 3.29.0)
 project(BackShell)
 add_executable(BackShell ./src/main.cpp)
+add_executable(key_logger ./src/key_logger.cpp)
+add_executable(reverse_shell ./src/reverse_shell.cpp)
