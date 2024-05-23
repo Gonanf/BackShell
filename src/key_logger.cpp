@@ -17,7 +17,7 @@ int main()
         char bufc[100];
         ZeroMemory(bufc, sizeof(bufc));
         int r = recv(victim, bufc, sizeof(bufc), NULL);
-        if (r > 0) std::cout << bufc << std::endl;
+        if (r > 0) std::cout << bufc;
         else if (r < 0) error("no se recibio bien el mensaje", WSAGetLastError());
     }
     return 0;

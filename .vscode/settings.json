@@ -63,6 +63,20 @@
         "ratio": "cpp",
         "stop_token": "cpp",
         "thread": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "fstream": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "queue": "cpp",
+        "xtree": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "chrono": "cpp",
+        "complex": "cpp",
+        "forward_list": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "iomanip": "cpp",
+        "sstream": "cpp"
     }
 }
