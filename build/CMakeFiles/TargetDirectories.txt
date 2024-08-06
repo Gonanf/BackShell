@@ -1,0 +1,6 @@
+C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/build/CMakeFiles/BackShell.dir
+C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/build/CMakeFiles/key_logger.dir
+C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/build/CMakeFiles/reverse_shell.dir
+C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/build/CMakeFiles/window_viewer.dir
+C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/build/CMakeFiles/ZERO_CHECK.dir

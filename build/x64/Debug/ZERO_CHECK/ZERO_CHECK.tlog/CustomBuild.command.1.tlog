@@ -1,0 +1,10 @@
+^C:\USERS\GABYS\ONEDRIVE\DESKTOP\PROGRAMACION\BACKSHELL\BUILD\CMAKEFILES\B2CB7159D8C09FF7D19A1C094ADDEC14\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/gabys/OneDrive/Desktop/Programacion/BackShell -BC:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/build/BackShell.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

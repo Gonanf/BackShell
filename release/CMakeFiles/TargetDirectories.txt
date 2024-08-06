@@ -1,6 +1,0 @@
-C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release/CMakeFiles/BackShell.dir
-C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release/CMakeFiles/key_logger.dir
-C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release/CMakeFiles/reverse_shell.dir
-C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release/CMakeFiles/window_viewer.dir
-C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release/CMakeFiles/ALL_BUILD.dir
-C:/Users/gabys/OneDrive/Desktop/Programacion/BackShell/release/CMakeFiles/ZERO_CHECK.dir

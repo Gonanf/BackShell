@@ -7,31 +7,27 @@
 // TODO: Añadir limpieza y to eso (WSACleanup y liberar variables)
 
 
-SOCKET connect_to_client(char* port_name){
+SOCKET connect_to_client(u_short port_name){
     int r = 0;
     SOCKET listening_socket = INVALID_SOCKET;
     SOCKET victim_socket = INVALID_SOCKET;
     WSADATA init;
 
     if (WSAStartup(MAKEWORD(2, 2), &init) != 0) error("WSA no se inicio correctamente", WSAGetLastError());
-    struct addrinfo address_inf;
+    struct sockaddr_in  address_inf;
     ZeroMemory(&address_inf, sizeof(address_inf));
-    address_inf.ai_protocol = IPPROTO_TCP;
-    address_inf.ai_family = AF_INET;
-    address_inf.ai_socktype = SOCK_STREAM;
-    address_inf.ai_flags = AI_PASSIVE;
-    struct addrinfo *result = NULL;
+    address_inf.sin_family = AF_INET;
+    address_inf.sin_addr.S_un.S_addr = INADDR_ANY;
+    address_inf.sin_port = htons(port_name);
+    
 
-    r = getaddrinfo(NULL, port_name, &address_inf, &result);
-    if (r != 0) error("no se pudo obtener la informacion de direccion del server", WSAGetLastError());
 
-    listening_socket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
+    listening_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (listening_socket == INVALID_SOCKET) error("no se pudo conectar al socket listener", WSAGetLastError());
 
-    r = bind(listening_socket, result->ai_addr, (int)result->ai_addrlen);
+    r = bind(listening_socket, (sockaddr*)(&address_inf), sizeof(address_inf));
     if (r == SOCKET_ERROR) error("no se pudo conectar el listener con la ip", WSAGetLastError());
 
-    freeaddrinfo(result);
 
     r = listen(listening_socket, SOMAXCONN);
     if (r == SOCKET_ERROR) error("no se pudo escuchar en el socket listener", WSAGetLastError());
